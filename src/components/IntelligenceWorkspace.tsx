@@ -2,12 +2,16 @@
 
 import { useEffect, useMemo, useState } from "react";
 import AnalysisResult from "@/components/AnalysisResult";
+import StructuredIntelligenceResult from "@/components/StructuredIntelligenceResult";
 import { analyze, type Analysis } from "@/lib/analyze";
+import { runIntelligence } from "@/lib/ai/intelligenceEngine";
+import type { IntelligenceResult } from "@/lib/ai/types";
 
 type AnalysisRecord = {
   id: string;
   sourceText: string;
   analysis: Analysis;
+  intelligence: IntelligenceResult;
   createdAt: string;
 };
 
@@ -88,6 +92,7 @@ export default function IntelligenceWorkspace() {
       id: crypto.randomUUID(),
       sourceText,
       analysis: analyze(sourceText),
+      intelligence: runIntelligence(sourceText),
       createdAt: new Date().toISOString(),
     };
 
@@ -169,7 +174,12 @@ export default function IntelligenceWorkspace() {
         </div>
 
         {latestRecord && (
-          <AnalysisResult analysis={latestRecord.analysis} />
+          <>
+            <AnalysisResult analysis={latestRecord.analysis} />
+            <StructuredIntelligenceResult
+              result={latestRecord.intelligence}
+            />
+          </>
         )}
       </section>
 
@@ -251,6 +261,11 @@ export default function IntelligenceWorkspace() {
 
                     <p className="mt-4 line-clamp-3 text-sm leading-6 text-zinc-300">
                       {record.sourceText}
+                    </p>
+
+                    <p className="mt-3 text-sm leading-6 text-zinc-500">
+                      {record.intelligence?.summary ??
+                        "Legacy analysis without a structured summary."}
                     </p>
 
                     <div className="mt-4 flex flex-wrap gap-2">
