@@ -1,9 +1,29 @@
-const navItems = ["Dashboard", "Intelligence", "Sources", "History", "Settings"];
+import IntelligenceForm from "@/components/IntelligenceForm";
+
+const navItems = [
+  "Dashboard",
+  "Intelligence",
+  "Sources",
+  "History",
+  "Settings",
+];
 
 const metrics = [
-  { label: "Analyses", value: "0", detail: "No data analyzed yet" },
-  { label: "Risk Signals", value: "0", detail: "No elevated signals" },
-  { label: "Pattern Strength", value: "—", detail: "Waiting for evidence" },
+  {
+    label: "Analyses",
+    value: "0",
+    detail: "No saved analyses yet",
+  },
+  {
+    label: "Risk Signals",
+    value: "0",
+    detail: "No saved signals yet",
+  },
+  {
+    label: "Pattern Strength",
+    value: "—",
+    detail: "Waiting for historical evidence",
+  },
 ];
 
 const capabilities = [
@@ -22,6 +42,7 @@ export default function Home() {
             <p className="text-xs font-bold tracking-[0.22em] text-lime-300">
               SAPIENS CONNECT
             </p>
+
             <h1 className="mt-3 text-3xl font-semibold tracking-tight">
               Intelligence OS <span className="text-lime-300">⥀</span>
             </h1>
@@ -31,6 +52,7 @@ export default function Home() {
             {navItems.map((item, index) => (
               <button
                 key={item}
+                type="button"
                 className={`w-full rounded-xl px-4 py-3 text-left text-sm font-medium transition ${
                   index === 0
                     ? "bg-lime-300 text-black"
@@ -46,10 +68,14 @@ export default function Home() {
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-zinc-500">
               Product status
             </p>
+
             <p className="mt-3 text-sm text-zinc-300">
-              Commercial application foundation
+              Local intelligence engine connected
             </p>
-            <p className="mt-2 text-xs text-zinc-500">Build app shell</p>
+
+            <p className="mt-2 text-xs text-zinc-500">
+              Build app shell
+            </p>
           </div>
         </aside>
 
@@ -60,12 +86,16 @@ export default function Home() {
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-lime-300">
                   Decision Intelligence
                 </p>
+
                 <h2 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
                   Sapiens Connect Dashboard
                 </h2>
               </div>
 
-              <button className="rounded-xl border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-zinc-300 transition hover:bg-white/[0.08]">
+              <button
+                type="button"
+                className="rounded-xl border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-zinc-300 transition hover:bg-white/[0.08]"
+              >
                 New analysis
               </button>
             </div>
@@ -77,9 +107,11 @@ export default function Home() {
                 <p className="text-xs font-bold uppercase tracking-[0.22em] text-lime-300">
                   Intelligence Product
                 </p>
+
                 <h3 className="mt-4 text-4xl font-semibold tracking-[-0.045em] sm:text-5xl">
                   Turn messy human information into structured intelligence.
                 </h3>
+
                 <p className="mt-5 max-w-2xl text-base leading-7 text-zinc-400">
                   Paste a conversation, email, decision, complaint, contract
                   excerpt, or situation. Sapiens Connect will identify risks,
@@ -87,21 +119,8 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="mt-8 rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5">
-                <textarea
-                  className="min-h-48 w-full resize-y bg-transparent text-base leading-7 text-white outline-none placeholder:text-zinc-600"
-                  placeholder="Describe what happened or paste source material here..."
-                />
-
-                <div className="mt-4 flex flex-col gap-3 border-t border-white/10 pt-4 sm:flex-row sm:items-center sm:justify-between">
-                  <p className="text-xs text-zinc-500">
-                    Text stays local until an intelligence service is connected.
-                  </p>
-
-                  <button className="rounded-xl bg-lime-300 px-5 py-3 text-sm font-bold text-black transition hover:bg-lime-200">
-                    Analyze intelligence
-                  </button>
-                </div>
+              <div className="mt-8">
+                <IntelligenceForm />
               </div>
             </section>
 
@@ -111,11 +130,17 @@ export default function Home() {
                   key={metric.label}
                   className="rounded-2xl border border-white/10 bg-[#0e1218] p-5"
                 >
-                  <p className="text-sm text-zinc-500">{metric.label}</p>
+                  <p className="text-sm text-zinc-500">
+                    {metric.label}
+                  </p>
+
                   <p className="mt-4 text-4xl font-semibold tracking-tight">
                     {metric.value}
                   </p>
-                  <p className="mt-3 text-sm text-zinc-500">{metric.detail}</p>
+
+                  <p className="mt-3 text-sm text-zinc-500">
+                    {metric.detail}
+                  </p>
                 </article>
               ))}
             </section>
@@ -127,10 +152,12 @@ export default function Home() {
                     <p className="text-xs font-bold uppercase tracking-[0.18em] text-lime-300">
                       Recent Intelligence
                     </p>
+
                     <h3 className="mt-2 text-xl font-semibold">
-                      No analyses yet
+                      No saved analyses yet
                     </h3>
                   </div>
+
                   <span className="rounded-full border border-white/10 px-3 py-1 text-xs text-zinc-500">
                     Empty state
                   </span>
@@ -138,7 +165,7 @@ export default function Home() {
 
                 <div className="mt-8 rounded-2xl border border-dashed border-white/10 px-6 py-14 text-center">
                   <p className="text-sm text-zinc-400">
-                    Your analyzed decisions and conversations will appear here.
+                    Saved decisions and conversations will appear here.
                   </p>
                 </div>
               </article>
@@ -157,6 +184,7 @@ export default function Home() {
                       <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-lime-300 text-xs font-bold text-black">
                         {index + 1}
                       </span>
+
                       <p className="text-sm leading-6 text-zinc-300">
                         {capability}
                       </p>
