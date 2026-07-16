@@ -1,17 +1,17 @@
-import IntelligenceWorkspace from "@/components/IntelligenceWorkspace";
+import DossierWorkspace from "@/components/DossierWorkspace";
 
 const navItems = [
-  "Dashboard",
-  "Intelligence",
-  "Sources",
-  "History",
-  "Settings",
+  "Dossier",
+  "Entities",
+  "Evidence",
+  "Decisions",
+  "Memory",
 ];
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#05070a] text-white">
-      <div className="mx-auto flex min-h-screen max-w-[1600px]">
+      <div className="mx-auto flex min-h-screen max-w-[1700px]">
         <aside className="hidden w-72 shrink-0 border-r border-white/10 bg-[#090c11] p-6 lg:flex lg:flex-col">
           <div className="mb-12">
             <p className="text-xs font-bold tracking-[0.22em] text-lime-300">
@@ -45,11 +45,11 @@ export default function Home() {
             </p>
 
             <p className="mt-3 text-sm text-zinc-300">
-              Pattern engine development
+              Live dossier engine connected
             </p>
 
             <p className="mt-2 text-xs text-zinc-500">
-              Local memory enabled
+              OpenAI Responses API
             </p>
           </div>
         </aside>
@@ -61,12 +61,12 @@ export default function Home() {
             </p>
 
             <h2 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
-              Sapiens Connect Dashboard
+              Sapiens Connect Dossier Engine
             </h2>
           </header>
 
           <div className="p-5 sm:p-8 lg:p-10">
-            <IntelligenceWorkspace />
+            <DossierWorkspace />
           </div>
         </section>
       </div>
